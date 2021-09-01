@@ -5,6 +5,7 @@ $(document).ready(() => {
         event.preventDefault()
         const file = event.target.files[0]
         const reader = new window.FileReader()
+        showImage(file)
         reader.readAsArrayBuffer(file)
         reader.onloadend = (e) => {
             result = reader.result
@@ -31,4 +32,11 @@ $(document).ready(() => {
             $('#url').append(string)
         }
     })
+    function showImage (file) {
+        const reader = new window.FileReader() 
+        reader.readAsDataURL(file)
+        reader.onload = () => {
+            $('#image-show').attr('src', reader.result)
+        }
+    }
 })
