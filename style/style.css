@@ -1,6 +1,8 @@
+body {
+    margin: 0;
+}
 .main {
     width: 100%;
-    height: 100vh;
 }
 .image {
     width: 25%;
@@ -9,6 +11,7 @@
 }
 .image img {
     width: 100%;
+    border: .5px solid #acacac;
 }
 #url {
     width: 100%;
@@ -59,4 +62,40 @@ label {
     background: rgb(183, 148, 110);
     cursor: not-allowed;
     cursor: pointer;
+}
+#loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(125, 125, 125, 0.5);
+}
+#loading.none {
+    display: none;
+}
+.loading {
+    height: 0;
+    width: 0;
+    padding: 15px;
+    border: 6px solid #ccc;
+    border-right-color: #888;
+    border-radius: 22px;
+    -webkit-animation: rotate 1s infinite linear;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+  }
+  
+  @-webkit-keyframes rotate {
+    100% {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+
+@media only screen and (max-width: 768px) {
+    .image {
+        width: 50%;
+    }
+    .fieldset {
+        width: 50%;
+    }
 }

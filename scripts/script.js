@@ -14,6 +14,7 @@ $(document).ready(() => {
     })
     $('#btn-submit').on("click", async function() {
         event.preventDefault()
+        $('#loading').removeClass('none');
         if (result == null) {
             alert('Choose file please!')
         } else {
@@ -22,14 +23,16 @@ $(document).ready(() => {
                 port: 5001,
                 protocol: 'https'
             })
-            var data = await ipfs.add(result)
-            $('#image-show').attr('src', `https://cloudflare-ipfs.com/ipfs/${data.path}`)
-            var string = `
-                <p><a href="ipfs://${data.path}">ipfs://${data.path}</a></p>
-                <p><a href="https://ipfs.infura.io/ipfs/${data.path}">https://ipfs.infura.io/ipfs/${data.path}</a></p>
-                <p><a href="https://cloudflare-ipfs.com/ipfs/${data.path}">https://cloudflare-ipfs.com/ipfs/${data.path}</a></p>
-            `
-            $('#url').append(string)
+            await ipfs.add(result).then((data) => {
+                $('#image-show').attr('src', `https://cloudflare-ipfs.com/ipfs/${data.path}`)
+                var string = `
+                    <p><a href="ipfs://${data.path}">ipfs://${data.path}</a></p>
+                    <p><a href="https://ipfs.infura.io/ipfs/${data.path}">https://ipfs.infura.io/ipfs/${data.path}</a></p>
+                    <p><a href="https://cloudflare-ipfs.com/ipfs/${data.path}">https://cloudflare-ipfs.com/ipfs/${data.path}</a></p>
+                `
+                $('#url').append(string)
+                $('#loading').addClass('none');
+            })
         }
     })
     function showImage (file) {
