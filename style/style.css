@@ -9,7 +9,7 @@ body {
     height: auto;
     margin: auto;
 }
-.image img {
+.image img, .image video {
     width: 100%;
     border: .5px solid #acacac;
 }
@@ -46,6 +46,9 @@ form {
     border: 1px solid #acacac;
     border-radius: 5px;
     cursor: pointer;
+}
+.d-none {
+    display: none;
 }
 label {
     width: 100%;

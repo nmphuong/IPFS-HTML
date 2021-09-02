@@ -14,6 +14,7 @@ $(document).ready(() => {
     })
     $('#btn-submit').on("click", async function() {
         event.preventDefault()
+        console.log(result)
         $('#loading').removeClass('none');
         if (result == null) {
             alert('Choose file please!')
@@ -36,10 +37,19 @@ $(document).ready(() => {
         }
     })
     function showImage (file) {
+        var type = file.type.includes('image') ? 'image' : 'video'
         const reader = new window.FileReader() 
         reader.readAsDataURL(file)
         reader.onload = () => {
-            $('#image-show').attr('src', reader.result)
+            if (type == 'video') {
+                $('#video-show').attr('src', reader.result)
+                $('#video-show').removeClass('d-none')
+                $('#image-show').addClass('d-none')
+            } else {
+                $('#image-show').attr('src', reader.result)
+                $('#image-show').removeClass('d-none')
+                $('#video-show').addClass('d-none')
+            }
         }
     }
 })
